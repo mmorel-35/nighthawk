@@ -1,0 +1,5 @@
+# TODO: Migrated to Bzlmod
+local_repository(
+  name = "envoy_build_config",
+  path = ".",
+)
