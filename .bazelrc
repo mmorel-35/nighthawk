@@ -36,7 +36,8 @@ startup --host_jvm_args="-DBAZEL_TRACK_SOURCE_DIRECTORIES=1"
 # global
 #############################################################################
 
-common --noenable_bzlmod
+# Enable bzlmod for modern dependency management
+common --enable_bzlmod
 
 fetch --color=yes
 run --color=yes
