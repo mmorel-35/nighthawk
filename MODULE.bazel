@@ -6,9 +6,9 @@ module(
     repo_name = "nighthawk",
 )
 
-# Only declare Python dependencies in bzlmod
-# Other dependencies (Envoy, etc.) are handled via WORKSPACE.bzlmod
-# to avoid version conflicts with Envoy's expectations
+# Declare dependencies to avoid version conflicts with WORKSPACE
+# rules_foreign_cc must be loaded first to ensure compatibility
+bazel_dep(name = "rules_foreign_cc", version = "0.15.1")
 bazel_dep(name = "rules_python", version = "0.37.0")
 
 # Python interpreter setup
