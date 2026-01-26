@@ -6,48 +6,10 @@ module(
     repo_name = "nighthawk",
 )
 
-# Bazel dependencies
-bazel_dep(name = "bazel_skylib", version = "1.7.1")
-bazel_dep(name = "rules_cc", version = "0.0.11")
+# Only declare Python dependencies in bzlmod
+# Other dependencies (Envoy, etc.) are handled via WORKSPACE.bzlmod
+# to avoid version conflicts with Envoy's expectations
 bazel_dep(name = "rules_python", version = "0.37.0")
-bazel_dep(name = "platforms", version = "0.0.10")
-bazel_dep(name = "zlib", version = "1.3.1.bcr.4")
-
-# Envoy and its dependencies
-bazel_dep(name = "envoy", version = "1.37.0-dev")
-bazel_dep(name = "envoy_api", version = "1.37.0-dev")
-bazel_dep(name = "envoy_mobile", version = "1.37.0-dev")
-
-# Override Envoy with specific commit
-ENVOY_COMMIT = "df91aee6e7c1b8fb360f947b44b11572262816b1"
-ENVOY_INTEGRITY = "sha256-MI9E4/5RfZekko+OxQH/UkJOorRnLlXfCwZS+AvuW1k="
-
-archive_override(
-    module_name = "envoy",
-    integrity = ENVOY_INTEGRITY,
-    strip_prefix = "envoy-%s" % ENVOY_COMMIT,
-    urls = ["https://github.com/envoyproxy/envoy/archive/%s.tar.gz" % ENVOY_COMMIT],
-)
-
-archive_override(
-    module_name = "envoy_api",
-    integrity = ENVOY_INTEGRITY,
-    strip_prefix = "envoy-%s/api" % ENVOY_COMMIT,
-    urls = ["https://github.com/envoyproxy/envoy/archive/%s.tar.gz" % ENVOY_COMMIT],
-)
-
-archive_override(
-    module_name = "envoy_mobile",
-    integrity = ENVOY_INTEGRITY,
-    strip_prefix = "envoy-%s/mobile" % ENVOY_COMMIT,
-    urls = ["https://github.com/envoyproxy/envoy/archive/%s.tar.gz" % ENVOY_COMMIT],
-)
-
-# Local override for envoy_build_config
-local_path_override(
-    module_name = "envoy_build_config",
-    path = "envoy_build_config",
-)
 
 # Python interpreter setup
 python = use_extension("@rules_python//python/extensions:python.bzl", "python")
