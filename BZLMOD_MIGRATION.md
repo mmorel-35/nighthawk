@@ -38,7 +38,7 @@ The project uses a hybrid approach where:
 
 1. **Protobuf Version Conflicts**: When building with GCC, there are compilation errors related to protobuf version mismatches between WORKSPACE (older version) and bzlmod dependencies (newer versions)
 
-2. **LLVM Toolchain**: The pre-built LLVM toolchain requires `libtinfo.so.5` which isn't available in modern Ubuntu
+2. **LLVM Toolchain** (Pre-existing): The pre-built LLVM toolchain requires `libtinfo.so.5` which isn't available in modern Ubuntu distributions. This is unrelated to bzlmod and affects the original WORKSPACE build as well. Workaround: Use `--config=gcc` to build with GCC instead.
 
 3. **rules_foreign_cc Compatibility**: Version conflicts when bzlmod and WORKSPACE both try to manage this dependency
 

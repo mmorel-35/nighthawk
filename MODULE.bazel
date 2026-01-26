@@ -2,7 +2,7 @@
 
 module(
     name = "nighthawk",
-    version = "0.0.0",
+    version = "0.1.0",
     repo_name = "nighthawk",
 )
 
@@ -26,4 +26,3 @@ pip.parse(
     requirements_lock = "//tools/base:requirements.txt",
 )
 use_repo(pip, "nh_pip3")
-
