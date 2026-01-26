@@ -1,0 +1,28 @@
+"""Nighthawk Bazel module"""
+
+module(
+    name = "nighthawk",
+    version = "0.1.0",
+    repo_name = "nighthawk",
+)
+
+# Declare dependencies to avoid version conflicts with WORKSPACE
+# rules_foreign_cc must be loaded first to ensure compatibility
+bazel_dep(name = "rules_foreign_cc", version = "0.15.1")
+bazel_dep(name = "rules_python", version = "0.37.0")
+
+# Python interpreter setup
+python = use_extension("@rules_python//python/extensions:python.bzl", "python")
+python.toolchain(
+    configure_coverage_tool = True,
+    python_version = "3.12",
+)
+
+# Python dependencies
+pip = use_extension("@rules_python//python/extensions:pip.bzl", "pip")
+pip.parse(
+    hub_name = "nh_pip3",
+    python_version = "3.12",
+    requirements_lock = "//tools/base:requirements.txt",
+)
+use_repo(pip, "nh_pip3")

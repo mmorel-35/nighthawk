@@ -49,10 +49,8 @@ load("@envoy//bazel:dependency_imports_extra.bzl", "envoy_dependency_imports_ext
 
 envoy_dependency_imports_extra()
 
-load("//bazel:python_dependencies.bzl", "nighthawk_python_dependencies")
-
-nighthawk_python_dependencies()
-
-load("@nh_pip3//:requirements.bzl", nh_pip3 = "install_deps")
-
-nh_pip3()
+# Python dependencies are now managed via bzlmod (see MODULE.bazel and BZLMOD_MIGRATION.md)
+# load("//bazel:python_dependencies.bzl", "nighthawk_python_dependencies")
+# nighthawk_python_dependencies()
+# load("@nh_pip3//:requirements.bzl", nh_pip3 = "install_deps")
+# nh_pip3()
